@@ -1,5 +1,37 @@
-<h3>New Post</h3>
+<h3>Creating a new Post object</h3>
 
+<h5>HTML form</h5>
+<form action='/posts' method='post'>
+	Title:
+	<input type='text' name='title'>
+	<br>
+	URL:
+	<input type='text' name='url'>
+	<br>
+<input type='submit'>
+</form>
 
+<h5>Non-Model Backed Forms</h5>
+<%= form_tag '/posts' do %>
+	<%= label_tag :title %>
+	<%= text_field_tag :title %>
+	<br>
+	<%= label_tag :url %>
+	<%= text_field_tag :url %>
+	<br>
+	<%= submit_tag 'Create Post' %>
+<% end %>
+
+<h5> Model backed form helpers </h5>
+<%= form_for @post do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	<br>
+	<%= f.label :url %>
+	<%= f.text_field :url%>
+	<br>
+	<%= f.submit 'Create Post' %>
+
+<% end %>
 
 <%= link_to 'Back', posts_path %>
