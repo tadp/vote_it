@@ -4,7 +4,7 @@
 
 <ul> 
 <% @posts.each do |post| %>
-  <li><%= link_to post.title, post %></li>
+  <li><%= link_to post.title, post %><%= link_to 'Destroy', post, method: :delete %></li>
   <!-- "post_path(post)" can also just be "post" -->
  <% end %>
 

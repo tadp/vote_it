@@ -1,5 +1,5 @@
 <h3>Creating a new Post object</h3>
-
+<!-- 
 <h5>HTML form</h5>
 <form action='/posts' method='post'>
 	Title:
@@ -20,9 +20,14 @@
 	<%= text_field_tag :url %>
 	<br>
 	<%= submit_tag 'Create Post' %>
-<% end %>
+<% end %> -->
 
 <h5> Model backed form helpers </h5>
+
+<% if @post.errors.any? %>
+<% flash[:error]= @post.errors.full_messages.join(', ') %>
+<% end %>
+
 <%= form_for @post do |f| %>
 	<%= f.label :title %>
 	<%= f.text_field :title %>

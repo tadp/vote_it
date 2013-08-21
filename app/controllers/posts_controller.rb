@@ -15,15 +15,14 @@ def new
 end
 
 def create
-  post = Post.new(params.require(:post).permit!)
-
-  if post.save
+  @post = Post.new(params.require(:post).permit!)
+  if @post.save
     flash[:notice] = "You created a new post!"
     # redirect_to posts_path, notice: "Another syntax"
     redirect_to posts_path
   else
     #handle validations
-    render
+    render :new
   end
 end
 
@@ -32,6 +31,18 @@ def edit
 end
 
 def update
+
+end
+
+def destroy
+@post=Post.find(params[:id])
+@post.destroy
+respond_to do |format|
+  format.html { redirect_to posts_path }
+  format.json { head :no_content }
+end
+
+        # @post.destroy
 end
 
 end
