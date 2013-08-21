@@ -15,7 +15,9 @@ def new
 end
 
 def create
-  @post = Post.new(params.require(:post).permit!)
+  # @post = Post.new(params.require(:post).permit!)
+  # Added in private method below
+  @post = Post.new(post_params)
   if @post.save
     flash[:notice] = "You created a new post!"
     # redirect_to posts_path, notice: "Another syntax"
@@ -37,12 +39,17 @@ end
 def destroy
 @post=Post.find(params[:id])
 @post.destroy
-respond_to do |format|
-  format.html { redirect_to posts_path }
-  format.json { head :no_content }
+  respond_to do |format|
+    format.html { redirect_to posts_path }
+    format.json { head :no_content }
+  end
 end
 
-        # @post.destroy
+
+private
+
+def post_params
+  params.require(:post).permit(:title, :url)
 end
 
 end
