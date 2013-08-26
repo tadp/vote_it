@@ -1,4 +1,11 @@
 <h3>Creating a new Post object</h3>
+
+<%= render 'shared/errors', obj: @post %>
+<%= render 'form' %>
+
+
+<%= link_to 'Back', posts_path %>
+
 <!-- 
 <h5>HTML form</h5>
 <form action='/posts' method='post'>
@@ -20,7 +27,7 @@
 	<%= text_field_tag :url %>
 	<br>
 	<%= submit_tag 'Create Post' %>
-<% end %> -->
+<% end %> 
 
 <h5> Model backed form helpers </h5>
 
@@ -37,6 +44,5 @@
 	<br>
 	<%= f.submit 'Create Post' %>
 
-<% end %>
+<% end %> -->
 
-<%= link_to 'Back', posts_path %>

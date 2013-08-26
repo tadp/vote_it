@@ -7,4 +7,27 @@
 <%= @post.title %>
 
 <%= params[:id] %>
+
+<p>URL: <%= @post.url %> </p>
+<p>Description: <%= @post.description %></p>
+
+<%= render 'shared/errors', obj: @comment %>
+<%= form_for [@post,@comment] do |f| %>
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br>
+  <%= f.submit 'Create comment', class: 'btn btn-primary' %>
+
+<% end %>
+
+
+<p>
+  <h4>Comments:</h4>
+<ol>
+  <% @post.comments.each do |comment| %>
+    <li><%= comment.body %></li>
+  <% end %>
+</ol>
+
+
 </p>

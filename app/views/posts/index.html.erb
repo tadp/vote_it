@@ -4,10 +4,14 @@
 
 <ul> 
 <% @posts.each do |post| %>
-  <li><%= link_to post.title, post %><%= link_to 'Destroy', post, method: :delete %>
-  	<small>[<%= link_to 'edit', edit_post_path(post) %>]</small> 
-
-  	<small>[<%= link_to 'url', fix_url(post.url) %>]</small></li>
+  <li><%= link_to post.title, post %>
+  	<small>
+      [<%= link_to 'del', post, method: :delete %>]
+    	[<%= link_to 'url', fix_url(post.url) %>]
+  	posted on <%= display_datetime(post.created_at) %>
+      [<%= link_to 'edit', edit_post_path(post) %>]
+    </small>
+  </li>
   <!-- "post_path(post)" can also just be "post" -->
  <% end %>
 
