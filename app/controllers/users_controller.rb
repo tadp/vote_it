@@ -4,6 +4,21 @@ class UsersController < ApplicationController
   end
 
   def create
-   
+   @user = User.new(users_params)
+     if @user.save
+      flash[:notice]= "You have registered, now log in"
+      redirect_to root_path
+     else
+      render :new
+     end
   end
+
+
+
+  def users_params
+    params.require(:user).permit(:username, :password)
+  end
+
 end
+
+

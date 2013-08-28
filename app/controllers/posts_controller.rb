@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 before_action :set_post, only: [:show, :edit, :update]
+before_action :require_user, only: [:new, :create, :edit, :update]
 
 def index
 	@posts=Post.all
@@ -16,11 +17,10 @@ def new
 end
 
 def create
-
   # @post = Post.new(params.require(:post).permit!)
   # Added in private method below
-
   @post = Post.new(post_params)
+  @post.creator = current_user
   if @post.save
     flash[:notice] = "You created a new post!"
     # redirect_to posts_path, notice: "Another syntax"

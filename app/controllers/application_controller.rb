@@ -9,4 +9,24 @@ class ApplicationController < ActionController::Base
   # def fix_url
   # end
 
+  helper_method :current_user, :logged_in?
+
+
+  def current_user
+    #memoization. It is saved into an instance variable. Doesn't hit the database multiple times.
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def logged_in?
+    !!current_user
+  end
+
+  def require_user
+    unless logged_in?
+      flash[:error] = "Must be logged in to do that"
+      redirect_to root_path
+    end
+  end
+  
 end
+
