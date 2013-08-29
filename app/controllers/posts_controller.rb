@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
-before_action :set_post, only: [:show, :edit, :update]
-before_action :require_user, only: [:new, :create, :edit, :update]
+before_action :set_post, only: [:show, :edit, :update, :vote]
+before_action :require_user, only: [:new, :create, :edit, :update, :vote]
+before_action :require_creator, only: [:edit, :update]
 
 def index
 	@posts=Post.all
+  @posts.sort_by! {|post| post.total_votes}.reverse!
 end
 
 def show
@@ -13,7 +15,6 @@ end
 
 def new
   @post = Post.new
-
 end
 
 def create
@@ -53,6 +54,24 @@ def destroy
   end
 end
 
+def vote
+  # Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+  # flash[:notice]="You successfully voted!"
+  # redirect_to :back
+
+  @vote= Vote.new(voteable: @post, creator: current_user, vote: params[:vote])
+  if @vote.save
+    flash[:notice] = "You created a new post!"
+    # redirect_to posts_path, notice: "Another syntax"
+    redirect_to posts_path
+  else
+    #handle validations
+    render :new
+  end
+
+
+end
+
 
 private
 
@@ -62,6 +81,10 @@ end
 
 def set_post
    @post = Post.find(params[:id])
+end
+
+def require_creator
+  access_denied unless @post.creator == current_user
 end
 
 

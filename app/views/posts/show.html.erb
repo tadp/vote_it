@@ -1,4 +1,4 @@
-<h3>You are looking at my first post.</h3>
+<h3>You are looking at <%= @post.title %></h3>
 
 <p>
 
@@ -11,21 +11,40 @@
 <p>URL: <%= @post.url %> </p>
 <p>Description: <%= @post.description %></p>
 
-<%= render 'shared/errors', obj: @comment %>
-<%= form_for [@post,@comment] do |f| %>
-  <%= f.label :body %>
-  <%= f.text_area :body %>
-  <br>
-  <%= f.submit 'Create comment', class: 'btn btn-primary' %>
+<p>
+  <% if logged_in? %>
+    <%= render 'shared/errors', obj: @comment %>
+    <%= form_for [@post,@comment] do |f| %>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+      <br>
+      <%= f.submit 'Create comment', class: 'btn btn-primary' %>
 
-<% end %>
-
+    <% end %>
+  <% end %>
 
 <p>
+
+
+
+
   <h4>Comments:</h4>
 <ol>
   <% @post.comments.each do |comment| %>
-    <li><%= comment.body %></li>
+    <li>  
+
+    <div class = "bubble-list">
+    <a class = 'btn btn-info user-picture'><i class="icon-user icon-white"></i></a>
+      <div class = "bubble clearfix" >
+        <div class = "bubble-content">
+          <div class = "point"></div>
+          
+      <%= comment.body %> by <%= comment.creator.username %>
+
+      </div>
+     </div>
+    </div>
+    </li>
   <% end %>
 </ol>
 

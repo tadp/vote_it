@@ -1,10 +1,16 @@
 <h1>Listing posts</h1>
 
-<p>Here are all the posts:.</p>
+<p>Here are all the posts:</p>
 
 <ul> 
 <% @posts.each do |post| %>
-  <li><%= link_to post.title, post %>
+
+  <li>
+    (<%= link_to '+', vote_post_path(post, vote: true), method: :post %>
+    <%= post.total_votes %>
+    <%= link_to '-', vote_post_path(post, vote: false), method: :post %>)
+
+    <%= link_to post.title, post %>
   	<small>
       [<%= link_to 'del', post, method: :delete %>]
     	[<%= link_to 'url', fix_url(post.url) %>]
