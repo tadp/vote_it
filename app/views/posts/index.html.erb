@@ -1,14 +1,13 @@
 <h1>Listing posts</h1>
 
-<p>Here are all the posts:</p>
+<!-- <%= button_to 'New Post', new_post_path, class: "btn" %> -->
 
-<ul> 
 <% @posts.each do |post| %>
-
+<div class = 'well span8'>
   <li>
-    (<%= link_to '+', vote_post_path(post, vote: true), method: :post %>
+    <%= link_to '', vote_post_path(post, vote: true), method: :post, class:"icon-thumbs-up" %>
     <%= post.total_votes %>
-    <%= link_to '-', vote_post_path(post, vote: false), method: :post %>)
+    <%= link_to '', vote_post_path(post, vote: false), method: :post, class:"icon-thumbs-down" %>
 
     <%= link_to post.title, post %>
   	<small>
@@ -18,9 +17,8 @@
       [<%= link_to 'edit', edit_post_path(post) %>]
     </small>
   </li>
+</div>
   <!-- "post_path(post)" can also just be "post" -->
  <% end %>
 
-</ul>
 
-<%= link_to 'New Post', new_post_path %>
