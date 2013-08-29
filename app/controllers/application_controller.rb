@@ -3,11 +3,16 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  #If you want a helper method available in BOTH the controller and the views, then you would set a helper method like this:
+  # If you want a helper method available in BOTH the controller and the views, then you would set a helper method like this:
   
-  # helper_method :fix_url
-  # def fix_url
-  # end
+  helper_method :fix_url
+  def fix_url(url)
+    if url.starts_with?('http')
+      url
+    else
+      "http://www." + url
+    end
+  end
 
   helper_method :current_user, :logged_in?
 

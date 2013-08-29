@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
 before_action :set_post, only: [:show, :edit, :update, :vote]
 before_action :require_user, only: [:new, :create, :edit, :update, :vote]
 before_action :require_creator, only: [:edit, :update]
@@ -58,7 +59,6 @@ def vote
   # Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
   # flash[:notice]="You successfully voted!"
   # redirect_to :back
-
   @vote= Vote.new(voteable: @post, creator: current_user, vote: params[:vote])
   if @vote.save
     flash[:notice] = "You created a new post!"
@@ -68,8 +68,6 @@ def vote
     #handle validations
     render :new
   end
-
-
 end
 
 
@@ -86,7 +84,6 @@ end
 def require_creator
   access_denied unless @post.creator == current_user
 end
-
 
 end
 

@@ -5,9 +5,15 @@
 <% @posts.each do |post| %>
 <div class = 'well span8'>
   <li>
+    <span class="label label-success">
     <%= link_to '', vote_post_path(post, vote: true), method: :post, class:"icon-thumbs-up" %>
-    <%= post.total_votes %>
-    <%= link_to '', vote_post_path(post, vote: false), method: :post, class:"icon-thumbs-down" %>
+    </span>
+
+   <strong> <%= post.total_votes %> </strong>
+
+    <span class="label label-important">
+      <%= link_to '', vote_post_path(post, vote: false), method: :post, class:"icon-thumbs-down" %>
+    </span>
 
     <%= link_to post.title, post %>
   	<small>
