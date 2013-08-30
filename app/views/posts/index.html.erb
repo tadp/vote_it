@@ -6,13 +6,13 @@
 <div class = 'well span8'>
   <li>
     <span class="label label-success">
-    <%= link_to '', vote_post_path(post, vote: true), method: :post, class:"icon-thumbs-up" %>
+    <%= link_to '', vote_post_path(post, vote: true), method: :post, class:"icon-thumbs-up", remote: true %>
     </span>
 
-   <strong> <%= post.total_votes %> </strong>
+   <strong><span id="post_<%= post.id %>_votes"><%= post.total_votes %> </span></strong>
 
     <span class="label label-important">
-      <%= link_to '', vote_post_path(post, vote: false), method: :post, class:"icon-thumbs-down" %>
+      <%= link_to '', vote_post_path(post, vote: false), method: :post, class:"icon-thumbs-down", remote: true %>
     </span>
 
     <%= link_to post.title, post %>

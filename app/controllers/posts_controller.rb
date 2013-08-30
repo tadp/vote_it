@@ -59,15 +59,21 @@ def vote
   # Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
   # flash[:notice]="You successfully voted!"
   # redirect_to :back
-  @vote= Vote.new(voteable: @post, creator: current_user, vote: params[:vote])
-  if @vote.save
-    flash[:notice] = "You created a new post!"
-    # redirect_to posts_path, notice: "Another syntax"
-    redirect_to posts_path
-  else
-    #handle validations
-    render :new
+  Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+  
+   respond_to do |format|
+    format.html do
+    flash[:notice] = "Your vote was counted"
+    redirect_to :back
+    end
+
+    # format.js do
+    #   render :vote # /posts/vote.js.erb.   This is the default action so we just need "format.js"
+    # end
+    format.js
+    
   end
+
 end
 
 
