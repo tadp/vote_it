@@ -1,20 +1,44 @@
 <ul class="nav">
-  <li>
-    <i class= "icon-star"></i>
-    <%= link_to "Vote_it!", root_path, :class => 'brand' %>
-  </li>
+  <div class="logo">
+<div class = 'btn-group nav_item'>
+ <i class= "icon-star"></i>
+</div>
+</div>
 
-  <% if logged_in? %> 
-<li> <a>Welcome, <%= current_user.username %></a></li>
+  <li>
+    <%= link_to "Vote for it!", root_path, :class => 'brand' %>
+  </li>
+ 
+
+    <div class = 'btn-group nav_item'>
+    <button class="btn dropdown-toggle" data-toggle="dropdown">
+      Categories
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
       <li>
-        <%= link_to 'New Post', new_post_path %>
+        <a href="#"> Action </a>
       </li>
+      <li class = "divider"></li>
       <li>
         <%= link_to 'New Category', new_category_path %>
       </li>
+    </ul>
+  </div>
+
+
+      <li>
+        <%= link_to 'New Post', new_post_path %>
+      </li>
+
+  <% if logged_in? %> 
+
+  <li> <a>Welcome, <%= current_user.username %></a></li>
+
       <li>
         <%= link_to 'Voting Statistics', votes_path %>
       </li>
+
       <li>
         <%= link_to 'Logout', logout_path %>
       </li>
@@ -28,4 +52,4 @@
       </li>
 
 <% end %>
-</ul>
+

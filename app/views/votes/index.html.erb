@@ -13,7 +13,7 @@
     <tbody>
 
 <% @posts.sort_by! {|post| post.total_votes}.reverse!.first(3).each_with_index do |post, index| %>
-    <tr>
+    <tr class= "success">
         <td><%= index + 1 %></td>
         <td><%= pluralize(post.total_votes, "vote") %></td>
         <td><%= link_to post.title.capitalize, post %></td>
@@ -36,7 +36,7 @@
     <tbody>
 
 <% @posts.sort_by! {|post| post.total_votes}.first(3).each_with_index do |post, index| %>
-    <tr>
+    <tr class = "error">
         <td><%= index + 1 %></td>
         <td><%= pluralize(post.total_votes, "vote") %></td>
         <td><%= link_to post.title.capitalize, post %></td>
@@ -166,12 +166,12 @@
     <p>Try pointing and clicking on the points.</p>
 
     <p>
-      <label><input id="enablePosition" type="checkbox"></input>Show mouse position (id of 'enablePosition')</label>
+      <label class= "checkbox"><input id="enablePosition" type="checkbox"></input>Show mouse position (id of 'enablePosition')</label>
       <span id="hoverdata"></span>
       <span id="clickdata"></span>
     </p>
 
-    <p><label><input id="enableTooltip" type="checkbox"></input>Enable tooltip (id of 'enableTooltip')</label></p>
+    <p><label class = "checkbox"><input id="enableTooltip" type="checkbox"></input>Enable tooltip (id of 'enableTooltip')</label></p>
 
   </div>
 

@@ -16,7 +16,22 @@ class CommentsController < ApplicationController
     end
   end
 
+def vote
+   @comment = Comment.find(params[:id])
+  cvote= Vote.create(voteable: @comment, creator: current_user, vote: params[:vote])
+   respond_to do |format|
+    format.html do
+    flash[:notice] = "Your vote was counted"
+    redirect_to :back
+    end
+    # format.js do
+    #   render :vote # /posts/vote.js.erb.   This is the default action so we just need "format.js"
+    # end
+    format.js
+    end
+end
 
   private
+
 
 end
